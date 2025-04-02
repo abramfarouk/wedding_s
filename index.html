@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostafa & Nadina's Wedding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap');
+        
+        :root {
+            --gold: #D4AF37;
+            --rose-gold: #B76E79;
+            --soft-white: #FFF9F5;
+            --dark-bg: #1A1A1A;
+            --navy: #0A1A3A;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            color: var(--soft-white);
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            user-select: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 26, 58, 0.9) 0%, rgba(183, 110, 121, 0.6) 100%);
+            z-index: -1;
+        }
+
+        .invitation {
+            margin: 5% auto;
+            padding: 50px 40px;
+            background: rgba(255, 249, 245, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--soft-white);
+            margin: 20px 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            padding: 15px 30px;
+            border-radius: 50px;
+        }
+
+        .couple-names::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .date {
+            font-size: 32px;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin: 25px 0;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .date::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        /* Professional Countdown Boxes */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+
+        .countdown-box {
+            background: rgba(10, 26, 58, 0.7);
+            border-radius: 12px;
+            padding: 25px 15px;
+            min-width: 90px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--rose-gold));
+        }
+
+        .countdown-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(212, 175, 55, 0.1));
+            z-index: -1;
+        }
+
+        .countdown-value {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--gold);
+            display: block;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+            background: linear-gradient(to bottom, var(--gold), #F1C27D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--soft-white);
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: floatHeart linear forwards;
+            z-index: -1;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+        }
+
+        /* Image Slider */
+        .slider-container {
+            margin: 30px auto;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .slider {
+            width: 100%;
+            height: auto;
+        }
+
+        .slider-item {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        /* Controls for slider */
+        .tns-controls button {
+            background: rgba(212, 175, 55, 0.7);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50%;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tns-controls button:hover {
+            background: var(--gold);
+            transform: scale(1.1);
+        }
+.abram{
+    color: rgba(212, 175, 55, 0.9);
+    text-decoration: none;
+
+}
+.abram:hover{
+    color: rgba(228, 175, 0, 0.9);
+
+}
+  
+        /* Enhanced Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .music-player:hover {
+            transform: scale(1.1);
+            background: var(--gold);
+            animation: none;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .music-player i {
+            color: var(--navy);
+            font-size: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 800px;
+            color: var(--soft-white);
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .footer strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 54px;
+            }
+            .couple-names {
+                font-size: 32px;
+            }
+            .countdown-box {
+                min-width: 70px;
+                padding: 20px 10px;
+            }
+            .countdown-value {
+                font-size: 36px;
+            }
+            .slider-item img {
+                max-height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 42px;
+            }
+            .couple-names {
+                font-size: 26px;
+            }
+            .countdown-container {
+                gap: 10px;
+            }
+            .countdown-box {
+                min-width: 60px;
+                padding: 15px 8px;
+            }
+            .countdown-value {
+                font-size: 30px;
+            }
+            .slider-item img {
+                max-height: 250px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            to {
+                left: 120%;
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <!-- Floating Hearts Container -->
+    <div id="heartsContainer"></div>
+    
+    <!-- Music Player -->
+    <div class="music-visualizer-container">
+        <div class="music-player" id="musicPlayer" title="Click to play/pause">
+          <i class="fas fa-music"></i>
+          <div class="visualizer" id="visualizer"></div>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="../wedding_s/music/أبيع الدنيا (2).mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    <div class="invitation animate__animated animate__fadeIn">
+        <h1 class="animate__animated animate__fadeInDown">You're Invited</h1>
+        <p class="animate__animated animate__fadeIn animate__delay-1s">to celebrate the wedding of</p>
+        <div class="couple-names animate__animated animate__fadeIn animate__delay-2s">Mostafa & Nadina</div>
+        
+        <div class="date animate__animated animate__fadeIn animate__delay-3s">April 8, 2025</div>
+        
+        <!-- Image Slider -->
+        <div class="slider-container animate__animated animate__fadeIn animate__delay-4s">
+            <div class="slider">
+                <div class="slider-item">
+                    <img src="../wedding_s/Images/436347795_18410259361071326_4747379093089553707_n.jpg" alt="Wedding Photo 1">
+                </div>
+                <div class="slider-item">
+                    <img src="../wedding_s/Images/452527931_18428086312071326_2165292751863370741_n.jpg" alt="Wedding Photo 2">
+                </div>
+                <div class="slider-item">
+                    <img src="../wedding_s/Images/466430194_18448998373071326_1441753363276862138_n.jpg" alt="Wedding Photo 3">
+                </div>
+                <div class="slider-item">
+                    <img src="../wedding_s/Images/479873177_18465897610071326_3574686443294206697_n.jpg" alt="Wedding Photo 4">
+                </div>
+              
+            </div>
+        </div>
+        
+        <!-- Professional Countdown Timer -->
+        <div class="countdown-container animate__animated animate__fadeIn animate__delay-5s" id="countdown">
+            <!-- Countdown will be inserted here by JavaScript -->
+        </div>
+        
+
+        
+        <div class="location animate__animated animate__fadeIn animate__delay-7s">
+            <h3>Wedding Reception</h3>
+            <p>7:00 PM</p>
+            <p>Police Officers Club Zamalek</p>
+            <a href="https://maps.app.goo.gl/8rn2cn5hqj4P6caC9" target="_blank" class="map-link">View Location</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer animate__animated animate__fadeIn animate__delay-8s">
+        <p>Develop By <strong><a href="#" class="abram" tra>Abram Farouk</a></strong></p>
+        <p>Congratulations on the beautiful union! Wishing you both a lifetime of love and happiness.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+    <script>
+        // Enhanced Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('April 8, 2025 19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeRemaining = weddingDate - now;
+            
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            const countdownHTML = `
+                <div class="countdown-box" style="animation-delay: 0.1s">
+                    <span class="countdown-value">${days}</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-box" style="animation-delay: 0.2s">
+                    <span class="countdown-value">${hours}</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-box" style="animation-delay: 0.3s">
+                    <span class="countdown-value">${minutes}</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-box" style="animation-delay: 0.4s">
+                    <span class="countdown-value">${seconds}</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            `;
+            
+            document.getElementById("countdown").innerHTML = countdownHTML;
+            
+            if (timeRemaining <= 0) {
+                document.getElementById("countdown").innerHTML = `
+                    <div style="font-size: 24px; color: var(--gold); animation: pulse 1s infinite">
+                        The wedding has begun! We're celebrating now!
+                    </div>
+                `;
+                clearInterval(countdownInterval);
+                increaseHeartRate();
+            }
+        }
+        
+        // Music Player Functionality
+// Music Player with Reliable Autoplay
+const musicPlayer = document.getElementById('musicPlayer');
+const bgMusic = document.getElementById('bgMusic');
+let isPlaying = false;
+let isProcessing = false;
+
+// Lower volume for autoplay (browsers are more likely to allow this)
+bgMusic.volume = 0.5;
+
+function updateMusicPlayerUI() {
+    musicPlayer.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-music"></i>';
+    musicPlayer.style.background = isPlaying ? 'var(--gold)' : 'rgba(212, 175, 55, 0.9)';
+    musicPlayer.title = isPlaying ? 'Click to pause' : 'Click to play';
+}
+
+async function playMusic() {
+    if (isProcessing) return;
+    isProcessing = true;
+    
+    try {
+        await bgMusic.play();
+        isPlaying = true;
+        updateMusicPlayerUI();
+    } catch (error) {
+        console.log("Playback failed - will require user interaction");
+        // Show visual indicator that user needs to click
+        musicPlayer.style.boxShadow = '0 0 10px red';
+    } finally {
+        isProcessing = false;
+    }
+}
+
+function pauseMusic() {
+    bgMusic.pause();
+    isPlaying = false;
+    updateMusicPlayerUI();
+}
+
+// Main click handler
+musicPlayer.addEventListener('click', () => {
+    if (isPlaying) pauseMusic();
+    else playMusic();
+    musicPlayer.style.boxShadow = 'none'; // Remove any visual cue
+});
+
+// 1. First try - immediate autoplay (will likely fail but worth trying)
+setTimeout(() => playMusic(), 500);
+
+// 2. Second try - after any user interaction
+const interactiveEvents = ['click', 'scroll', 'touchstart', 'mousedown', 'keydown'];
+interactiveEvents.forEach(event => {
+    document.addEventListener(event, () => {
+        if (!isPlaying) playMusic();
+    }, { once: true, passive: true });
+});
+
+// 3. Fallback - show visual cue if still not playing
+setTimeout(() => {
+    if (!isPlaying) {
+        musicPlayer.style.boxShadow = '0 0 10px gold';
+        musicPlayer.title = 'Click to play music (browser requires interaction)';
+    }
+}, 3000);
+      // Initialize Image Slider
+const slider = tns({
+    container: '.slider',
+    items: 1,
+    slideBy: 'page',
+    autoplay: true,
+    autoplayButtonOutput: false,
+    autoplayTimeout: 3000,
+    controls: true,
+    drag: false,  // Disables dragging
+    nav: false,
+    speed: 500,
+    controlsText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+    responsive: {
+        600: {
+            items: 1
+        }
+    }
+});
+
+        
+        // Heart Animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            // Random properties
+            const size = Math.random() * 20 + 10;
+            const colors = ['#D4AF37', '#B76E79', '#F1C27D', '#FFFFFF'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = size + 'px';
+            heart.style.color = color;
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+        
+        // Increased heart rate for celebration
+        function increaseHeartRate() {
+            setInterval(createHeart, 100);
+            setTimeout(() => {
+                setInterval(createHeart, 300);
+            }, 10000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 300);
+        
+        // Initialize
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
